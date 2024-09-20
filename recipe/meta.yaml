@@ -1,0 +1,42 @@
+{% set name = "mip" %}
+{% set version = "1.15.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: file:///home/tbenes/aggregate/mip-feedstock/mip-1.15.0.tar.gz
+  sha256: 7f6f0381cfe2c52c1b8640203da2cb56974b26e23950ddfb1a76b37d916f197e
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.7,<3.12
+    - setuptools
+    - setuptools-scm
+    - pip
+  run:
+    - python >=3.7,<3.12
+    - cffi ==1.15.*
+
+test:
+  imports:
+    - mip
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  summary: Python tools for Modeling and Solving Mixed-Integer Linear Programs (MIPs)
+  license: EPL-2.0
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - Cansisti
