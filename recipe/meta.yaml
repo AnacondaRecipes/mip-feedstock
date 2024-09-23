@@ -6,31 +6,51 @@ package:
   version: {{ version }}
 
 source:
-  url: file:///home/tbenes/aggregate/mip-feedstock/mip-1.15.0.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 7f6f0381cfe2c52c1b8640203da2cb56974b26e23950ddfb1a76b37d916f197e
+  patches:
+    - 0001-unvendor-libraries.patch
 
 build:
-  noarch: python
+  skip: True  # [py<38 or py>311]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  missing_dso_whitelist:
+    - "**/librt.so.*"
+    - "**/libm.so.*"
+    - "**/libc.so.*"
+    - "**/ld-linux-x86-64.so.*"
+    - "**/libpthread.so.*"
   number: 0
 
 requirements:
   host:
-    - python >=3.7,<3.12
+    - python
     - setuptools
     - setuptools-scm
     - pip
   run:
-    - python >=3.7,<3.12
-    - cffi ==1.15.*
+    - python
+    - cffi >=1.15,<1.16
+  run_constrained:
+    - numpy >=1.24  # [py>=38]
+    - numpy ==1.21.6  # [py==37]
 
 test:
+  source_files:
+    - test
   imports:
     - mip
   commands:
     - pip check
+    # - pytest -v test
   requires:
     - pip
+    - pytest
+    - numpy
+    - networkx >=2.8.8  # [py>=38]
+    - networkx 2.6.3  # [py==37]
+    - matplotlib-base >=3.6.2  # [py>=38]
+    - matplotlib-base 3.5.3  # [py==37]
 
 about:
   summary: Python tools for Modeling and Solving Mixed-Integer Linear Programs (MIPs)
