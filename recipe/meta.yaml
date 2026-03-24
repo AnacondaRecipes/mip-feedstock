@@ -1,0 +1,53 @@
+{% set name = "mip" %}
+{% set version = "1.17.1" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/mip-{{ version }}.tar.gz
+  sha256: cc77afd50c7f5446c55fade258ed43b0e2b229285ee1b3b118d0fbbebdd88d0f
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.10
+    - setuptools
+    - setuptools-scm
+    - pip
+  run:
+    - python >=3.10
+    - cffi >=1.15
+    - cbcbox >=2.910
+
+
+test:
+  imports:
+    - mip
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/coin-or/python-mip
+  summary: Python tools for Modeling and Solving Mixed-Integer Linear Programs (MIPs)
+  license: EPL-2.0
+  license_file: LICENSE
+  dev_url: https://github.com/coin-or/python-mip
+  doc_url: https://github.com/coin-or/python-mip/tree/master/docs
+
+extra:
+  skip-lints:
+    - host_section_needs_exact_pinnings
+    - avoid_noarch
+  anaconda-services:
+    ref: https://anaconda.zendesk.com/agent/tickets/110080
+    reason: Client request
+  recipe-maintainers:
+    - ianaobi
