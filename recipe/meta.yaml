@@ -24,7 +24,7 @@ requirements:
   run:
     - python >=3.10,<3.13
     - cffi >=1.15
-    - cbcbox >=2.910
+    #- cbcbox >=2.910
 
 
 test:
