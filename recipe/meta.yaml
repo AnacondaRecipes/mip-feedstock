@@ -11,18 +11,18 @@ source:
 
 build:
   noarch: python
-  skip: true  # [py>311]
+  skip: true  # [py>312]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
 requirements:
   host:
-    - python 
+    - python >=3.10,<3.13
     - setuptools
     - setuptools-scm
     - pip
   run:
-    - python
+    - python >=3.10,<3.13
     - cffi >=1.15
     #- cbcbox >=2.910
 
