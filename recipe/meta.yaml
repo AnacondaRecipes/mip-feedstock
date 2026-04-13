@@ -16,12 +16,12 @@ build:
 
 requirements:
   host:
-    - python >=3.10
+    - python 
     - setuptools
     - setuptools-scm
     - pip
   run:
-    - python >=3.10
+    - python 
     - cffi >=1.15
     - cbcbox >=2.929
 
@@ -33,13 +33,6 @@ test:
   requires:
     - pip
 
-test:
-  imports:
-    - mip
-  commands:
-    - pip check
-  requires:
-    - pip
 
 about:
   home: https://github.com/coin-or/python-mip
