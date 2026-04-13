@@ -16,12 +16,12 @@ build:
 
 requirements:
   host:
-    - python 3.11 
+    - python 3.10 
     - setuptools
     - setuptools-scm
     - pip
   run:
-    - python 3.11
+    - python 3.10
     - cffi >=1.15
     - cbcbox >=2.929
 
