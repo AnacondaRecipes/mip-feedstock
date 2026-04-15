@@ -12,7 +12,7 @@ source:
 build:
   #noarch: python
   skip: true  # [py>=314]
-  skip: true  # [!linux-64]
+  skip: true  # [not linux-64]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
