@@ -1,5 +1,5 @@
 {% set name = "mip" %}
-{% set version = "1.17.6" %}
+{% set version = "2.0.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/mip-{{ version }}.tar.gz
-  sha256: 9da8074b80bd3ef788513d5a214ef832916d82aa66487da11a49c7da9f89d270
+  sha256: f3b68df2d3b42597012811e5d6a1742da987d1fc19e4c12fdc0cfb2df7f68d60
 
 build:
   #noarch: python
@@ -24,7 +24,7 @@ requirements:
   run:
     - python 
     - cffi >=1.15
-    - cbcbox >=2.929
+    - cbcbox >=2.937
 
 test:
   imports:
